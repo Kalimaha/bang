@@ -2,7 +2,8 @@ app.controller('LoginController', function($scope, $routeParams, $http, $cookies
   const providers = {
     'google': new firebase.auth.GoogleAuthProvider(),
     'facebook': new firebase.auth.FacebookAuthProvider(),
-    'twitter': new firebase.auth.TwitterAuthProvider()
+    'twitter': new firebase.auth.TwitterAuthProvider(),
+    'github': new firebase.auth.GithubAuthProvider()
   }
 
   $scope.login = (provider) => firebase.auth().signInWithRedirect(providers[provider])
