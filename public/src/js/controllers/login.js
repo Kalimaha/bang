@@ -1,7 +1,9 @@
 app.controller('LoginController', function($scope, $routeParams, $http, $cookies, $cookieStore) {
   const google_provider   = new firebase.auth.GoogleAuthProvider()
+  const facebook_provider = new firebase.auth.FacebookAuthProvider()
 
   $scope.google_login   = () => firebase.auth().signInWithRedirect(google_provider)
+  $scope.facebook_login = () => firebase.auth().signInWithRedirect(facebook_provider)
 
   $scope.logout = () => {
     firebase.auth().signOut()
