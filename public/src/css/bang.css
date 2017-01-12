@@ -21,9 +21,7 @@ body {
   margin: 20px 0;
 }
 
-.muted {
-  /*color: #fff;*/
-}
+.muted {}
 
 button {
   width: 100%;
@@ -56,4 +54,8 @@ td, th {
 .btn-github {
   background-color: #333;
   color: #fff;
+}
+
+.existing_game {
+  width: 100%;
 }
