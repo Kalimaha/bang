@@ -1,7 +1,6 @@
 app.factory('logoutService', () => {
   return {
     build_logout: ($cookies, $cookieStore) => {
-
       const html = `
         <div class="row">
           <div class="col-xs-3">
