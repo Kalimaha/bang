@@ -14,5 +14,5 @@ const logout = () => {
   firebase.auth().signOut()
   $('#login_area').empty()
   window.location = '#!/login'
-  $('#game_id').html('Bang!')
+  // $('#game_id').html('Bang!')
 }

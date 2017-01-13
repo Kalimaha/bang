@@ -1,5 +1,5 @@
-app.controller('PreGameController', function($scope, $routeParams, $http, $cookies, $cookieStore, logoutService, DB) {
-  logoutService.build_logout($cookies, $cookieStore)
+app.controller('PreGameController', function($scope, $routeParams, $http, $cookies, $cookieStore, $controller, DB) {
+  angular.extend(this, $controller('CommonController', { $scope: $scope }));
 
   const game_id = $routeParams.id
   $('#game_id').html(`Game ${game_id}`)
