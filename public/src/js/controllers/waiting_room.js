@@ -27,7 +27,7 @@ app.controller('WaitingRoomController', function($scope, $routeParams, $http, $c
           .ref(`games/${game_id}/players/${$cookieStore.get('user').id}`)
           .update(new_player)
           .then(() => {
-            window.location = `#!/games/${game_id}`
+            window.location = `#!/pregames/${game_id}`
           })
         }
       })
@@ -41,7 +41,7 @@ app.controller('WaitingRoomController', function($scope, $routeParams, $http, $c
             .ref(`games/${game_id}`)
             .set(empty_game())
             .then(() => {
-              window.location = `#!/games/${game_id}`
+              window.location = `#!/pregames/${game_id}`
             })
   }
 
@@ -68,7 +68,8 @@ app.controller('WaitingRoomController', function($scope, $routeParams, $http, $c
     return {
       'id': $cookieStore.get('user').id,
       'name': $cookieStore.get('user').name,
-      'picture': $cookieStore.get('user').picture
+      'picture': $cookieStore.get('user').picture,
+      'status': 'ALIVE'
     }
   }
 });
