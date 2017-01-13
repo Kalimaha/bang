@@ -1,22 +1,24 @@
-app.controller('PreGameController', function($scope, $routeParams, $http, $cookies, $cookieStore, logoutService) {
+app.controller('PreGameController', function($scope, $routeParams, $http, $cookies, $cookieStore, logoutService, DB) {
   logoutService.build_logout($cookies, $cookieStore)
 
-  $('#game_id').html(`Game ${$routeParams.id}`)
-
   const game_id = $routeParams.id
-  firebase.database().ref(`games/${game_id}/players`).on('value', (snapshot) => {
-    $('#pregame_players').empty()
+  $('#game_id').html(`Game ${game_id}`)
 
-    snapshot.forEach(p => { $('#pregame_players').append(format_pregame_player(p.val())) })
-  })
+  DB.selectListen(`games/${game_id}/players`, populate_table)
 
   $scope.select_all = () => $('input').prop('checked', $('#select_all').is(':checked'))
   $scope.start_game = () => {
-    get_non_selected_players().forEach((u) => firebase.database().ref(`games/${game_id}/players/${u}`).remove())
+    get_non_selected_players().forEach((u) => DB.delete(`games/${game_id}/players/${u}`))
 
     window.location = `#!/games/${game_id}`
   }
 });
+
+const populate_table = (players) => {
+  $('#pregame_players').empty()
+
+  players.forEach(p => { $('#pregame_players').append(format_pregame_player(p.val())) })
+}
 
 const format_pregame_player = (player) => `
   <tr>
