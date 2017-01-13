@@ -1,4 +1,4 @@
-app.controller('LoginController', function($scope, $routeParams, $http, $cookies, $cookieStore) {
+app.controller('LoginController', function($scope, $routeParams, $http, $cookies, $cookieStore, DB) {
   const providers = {
     'google': new firebase.auth.GoogleAuthProvider(),
     'facebook': new firebase.auth.FacebookAuthProvider(),
@@ -19,9 +19,8 @@ app.controller('LoginController', function($scope, $routeParams, $http, $cookies
       $cookies.user = bang_user(user)
       $cookieStore.put('user', bang_user(user), { expires: new Date(2017, 1, 1) })
 
-      db().ref(`users/${$cookies.user.id}`).set($cookieStore.get('user'))
-
-      redirect()
+      DB.insert(`users/${$cookies.user.id}`, $cookieStore.get('user'))
+      window.location = '#!/waitingroom'
     }
   })
 
@@ -33,10 +32,6 @@ app.controller('LoginController', function($scope, $routeParams, $http, $cookies
       picture: user.photoURL
     }
   }
-
-  const db = () => firebase.database()
-
-  const redirect = () => window.location = '#!/waitingroom'
 
   firebase.auth().getRedirectResult().catch((e) => $('#error_message').css('display', 'block'))
 })
